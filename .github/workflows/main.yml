@@ -76,7 +76,7 @@ jobs:
         
       - name: Launching container to test app
         run: |
-              docker run --name testapp -d yanuragaj/flasktest:latest
+              docker run --name testapp -d yanuragaj/flasktest:v1
               docker ps
               docker inspect testapp | grep "IPAddress"
               
@@ -93,7 +93,7 @@ jobs:
         
       - name: Launching container app to prod env
         run: |
-              docker run --name prodreadyapp -d yanuragaj/flaskprodready:latest
+              docker run --name prodreadyapp -d yanuragaj/flaskprodready:v1
               docker ps
               docker inspect prodreadyapp | grep "IPAddress"
               
