@@ -68,11 +68,11 @@ jobs:
       
         
       
- #             
-  #test:
-   # needs: [build]
-    #runs-on: ubuntu-latest
-    #steps:
+              
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
         
       - name: Launching container to test app
         run: |
@@ -84,7 +84,7 @@ jobs:
         run: curl 0.0.0.0
         
   publish:
-    needs: [build]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
     
