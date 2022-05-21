@@ -49,10 +49,7 @@ jobs:
         run:  sudo docker run hello-world
         
         
-      - name: bulding docker image to test app
-        run: |
-              sudo cp test-app/Dockerfile Dockerfile
-              docker build -t flasktest:v1 .
+      
         
       
               
@@ -60,6 +57,11 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: bulding docker image to test app
+        run: |
+              sudo cp test-app/Dockerfile Dockerfile
+              docker build -t flasktest:v1 .
+              
       - name: Launching container to test app
         run: |
               docker run --name testapp -d flasktest:v1
