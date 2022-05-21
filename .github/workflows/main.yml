@@ -76,12 +76,12 @@ jobs:
         
       - name: Launching container to test app
         run: |
-              docker run --name testapp -d -p 5000:5000 yanuragaj/flasktest:v1
+              docker run --name testapp -d -p 80:5000 yanuragaj/flasktest:v1
               docker ps
               docker inspect testapp | grep "IPAddress"
               
       - name: testing webserver is runnning 
-        run: curl 0.0.0.0:5000
+        run: curl 0.0.0.0
         
   publish:
     needs: [test]
@@ -89,7 +89,9 @@ jobs:
     steps:
     
       - name: creating prod ready container
-        run: docker tag flasktest:v1 yanuragaj/flaskprodready:v1
+        run: |
+              docker pull yanuragaj/flasktest:v1
+              docker tag yanuragaj/flasktest yanuragaj/flaskprodready:v1
         
       - name: Launching container app to prod env
         run: |
