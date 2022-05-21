@@ -76,12 +76,12 @@ jobs:
         
       - name: Launching container to test app
         run: |
-              docker run --name testapp -d yanuragaj/flasktest:v1
+              docker run --name testapp -d -p 5000:5000 yanuragaj/flasktest:v1
               docker ps
               docker inspect testapp | grep "IPAddress"
               
       - name: testing webserver is runnning 
-        run: curl 172.17.0.2:5000
+        run: curl 0.0.0.0:5000
         
   publish:
     needs: [test]
