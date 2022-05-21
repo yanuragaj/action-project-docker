@@ -48,4 +48,6 @@ jobs:
       - name: checking docker-engine insatllation
         run:  sudo docker run hello-world
 
+      - name: building flask app
+        run: python3 app/app.py
      
