@@ -48,7 +48,24 @@ jobs:
       - name: checking docker-engine insatllation
         run:  sudo docker run hello-world
         
+      - name: bulding docker image to test app
+        run: |
+              sudo cp test-app/Dockerfile Dockerfile
+              docker build -t yanuragaj/flasktest:v1 .
+              
         
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+     
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: yanuragaj/flasktest:latest  
       
         
       
@@ -57,17 +74,10 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-    
-      - uses: actions/checkout@v3
-      
-      - name: bulding docker image to test app
-        run: |
-              sudo cp test-app/Dockerfile Dockerfile
-              docker build -t flasktest:v1 .
-              
+        
       - name: Launching container to test app
         run: |
-              docker run --name testapp -d flasktest:v1
+              docker run --name testapp -d yanuragaj/flasktest:latest
               docker ps
               docker inspect testapp | grep "IPAddress"
               
@@ -84,7 +94,7 @@ jobs:
         
       - name: Launching container app to prod env
         run: |
-              docker run --name prodreadyapp -d flaskprodready:v1
+              docker run --name prodreadyapp -d yanuragaj/flaskprodready:latest
               docker ps
               docker inspect prodreadyapp | grep "IPAddress"
               
