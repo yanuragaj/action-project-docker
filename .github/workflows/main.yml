@@ -59,7 +59,7 @@ jobs:
               docker run --name testapp -d flasktest:v1
               docker ps
               docker inspect testapp | grep "IPAddress"
-              docker exec -it testapp /bin/bash -c "python3 app.py &"
+              docker exec -it testapp python3 app.py &
               docker logs testapp
               curl 172.17.0.2:5000
               docker ps
