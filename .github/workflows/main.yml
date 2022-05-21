@@ -64,7 +64,7 @@ jobs:
          # password: ${{ secrets.DOCKERHUB_TOKEN }}     
      
       - name: pushing image to dockerhub
-        run: docker push docker.io/yanuragaj/flasktest:latest
+        run: docker push yanuragaj/flasktest:v1
       
         
       
