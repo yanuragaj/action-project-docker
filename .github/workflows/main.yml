@@ -50,7 +50,7 @@ jobs:
         
         
       - name: bulding docker image to test app
-        run: docker build -t flasktest:v1 /home/runner/work/action-project-docker/action-project-docker/test-app/Dockerfile
+        run: docker build -t flasktest:v1 -f /home/runner/work/action-project-docker/action-project-docker/test-app/Dockerfile
         
       - name: Launching container to test app
         run: |
